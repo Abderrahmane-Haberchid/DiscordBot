@@ -1,5 +1,3 @@
-package test;
-
 import models.Groupe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
