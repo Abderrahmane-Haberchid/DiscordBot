@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import services.impl.UserServiceImpl;
 
@@ -37,6 +38,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetUsers() {
+        Mockito.reset(entityManager);
         // Given
         User user1 = new User();
         user1.setId(1L);
@@ -61,6 +63,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetUserById() {
+        Mockito.reset(entityManager);
         // Given
         User user = new User();
         user.setId(1L);
@@ -79,6 +82,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testCreateUser() {
+        Mockito.reset(entityManager);
         // Given
         User user = new User();
         user.setId(1L);
@@ -98,6 +102,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testUpdateUser() {
+        Mockito.reset(entityManager);
         // Given
         User user = new User();
         user.setId(1L);
@@ -118,6 +123,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testDeleteUser() {
+        Mockito.reset(entityManager);
         // Given
         User user = new User();
         user.setId(1L);
@@ -140,6 +146,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testDeleteUserNotFound() {
+        Mockito.reset(entityManager);
         // Given
         when(entityManager.find(User.class, 1L)).thenReturn(null);
 

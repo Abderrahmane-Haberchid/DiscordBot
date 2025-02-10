@@ -14,7 +14,7 @@ public class JaxConfig extends ResourceConfig {
 
     public JaxConfig() {
         register(new Binder());
-        packages("main.api", "main.services");
+        packages("api", "services");
         register(new EntityManagerFactoryProvider());
         // Enable detailed logging
         register(new LoggingFeature(Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME), Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 10000));

@@ -3,6 +3,6 @@
     <title>Welcome</title>
     </head>
     <body>
-        <h1>Welcome the this app</h1>
+        <h1>TP Discrod Bot REST API IS WORKING</h1>
     </body>
 </html>
