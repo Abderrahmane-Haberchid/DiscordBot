@@ -11,6 +11,8 @@ import discord4j.core.object.entity.User;
 import discord4j.core.object.entity.channel.TextChannel;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+
 
 public class MainApplication {
     public static void main(String[] args) {
@@ -46,6 +48,23 @@ public class MainApplication {
                         }).subscribe();
                     }
             });
+        // /todaydate command
+        gateway.on(MessageCreateEvent.class).subscribe(event -> {
+            Message message = event.getMessage();
+            System.out.println("Message recu est => " + message.getContent());
+            System.out.println("De la part du user => " + message.getAuthor().get().getUsername());
+            Guild guild = event.getGuild().block();
+            System.out.println("Guild est => " + guild.getName());
+
+            if (message.getContent().equalsIgnoreCase("/todaydate")) {
+                event.getMessage().getChannel().flatMap(channel ->
+                        channel.createMessage("La date d'aujourd'hui est: " + Instant.now())
+                ).onErrorResume(error -> {
+                    System.out.println("Erreur lors de l'envoi");
+                    return Mono.empty();
+                }).subscribe();
+            }
+        });
 
         // Reagir a lajout dun nouveau membre
         gateway.on(MemberJoinEvent.class).subscribe(event -> {
