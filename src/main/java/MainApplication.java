@@ -12,6 +12,8 @@ import discord4j.core.object.entity.channel.TextChannel;
 import reactor.core.publisher.Mono;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 
 public class MainApplication {
@@ -57,8 +59,10 @@ public class MainApplication {
             System.out.println("Guild est => " + guild.getName());
 
             if (message.getContent().equalsIgnoreCase("/todaydate")) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+                        .withZone(ZoneId.systemDefault());
                 event.getMessage().getChannel().flatMap(channel ->
-                        channel.createMessage("La date d'aujourd'hui est: " + Instant.now())
+                        channel.createMessage("La date d'aujourd'hui est: " + formatter.format(Instant.now()))
                 ).onErrorResume(error -> {
                     System.out.println("Erreur lors de l'envoi");
                     return Mono.empty();
